@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+_pdfshrink/
+_pdf2img/
+*.log
+*.png
+*.jpg
+!docs/**/*.png
+out/
+tests/out/

@@ -1,0 +1,47 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  smoke:
+    # the renderer is Windows.Data.Pdf, so the whole pipeline only runs on Windows
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.9", "3.12"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install Pillow
+        run: python -m pip install --upgrade pip pillow
+
+      - name: Compile
+        run: python -m py_compile pdf_shrink.py pdf_to_image.py tests/make_sample.py
+
+      - name: Build a synthetic sample PDF
+        run: python tests/make_sample.py tests/out/sample.pdf
+
+      - name: PDF -> smaller PDF
+        run: python pdf_shrink.py tests/out/sample.pdf tests/out/shrunk.pdf --target-kb 200
+
+      - name: PDF -> JPEG under a byte budget
+        run: python pdf_to_image.py tests/out/sample.pdf tests/out/page --target-kb 200
+
+      - name: Check the outputs are inside the budget
+        shell: pwsh
+        run: |
+          $pdf = Get-Item tests/out/shrunk.pdf
+          $img = Get-Item tests/out/page.jpg
+          "shrunk.pdf = $($pdf.Length) bytes"
+          "page.jpg   = $($img.Length) bytes"
+          if ($pdf.Length -gt 204800) { throw "PDF output over budget" }
+          if ($img.Length -gt 200000) { throw "image output over budget" }
