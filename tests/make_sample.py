@@ -71,4 +71,7 @@ def main(path):
 
 
 if __name__ == "__main__":
-    sys.exit(main(sys.argv[1] if len(sys.argv) > 1 else "sample.pdf"))
+    target = sys.argv[1] if len(sys.argv) > 1 else "sample.pdf"
+    parent = os.path.dirname(os.path.abspath(target))
+    os.makedirs(parent, exist_ok=True)
+    sys.exit(main(target))
