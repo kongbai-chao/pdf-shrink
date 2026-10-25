@@ -1,0 +1,56 @@
+name: Bug report
+description: Something produced a wrong or unreadable file
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Do not attach real documents.** They usually contain an ID number, a
+        photo and a verification code. Describe the PDF's structure instead, or
+        reproduce it with `tests/make_sample.py`.
+  - type: textarea
+    id: command
+    attributes:
+      label: Command you ran
+      render: shell
+      placeholder: python pdf_shrink.py in.pdf out.pdf --target-kb 200
+    validations:
+      required: true
+  - type: textarea
+    id: output
+    attributes:
+      label: Full console output
+      description: The lines with `dpi=`, `visual diff vs source:` and the final byte count matter most.
+      render: shell
+    validations:
+      required: true
+  - type: dropdown
+    id: symptom
+    attributes:
+      label: What went wrong
+      options:
+        - Output is larger than the target
+        - Text is blurry or broken
+        - A layer is missing (photo, logo, seal, border, QR)
+        - Page count is wrong / pages duplicated
+        - The file will not open
+        - Something else (described below)
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: How was the source PDF produced?
+      placeholder: iText 5.5 / Word export / scanner / unknown
+  - type: input
+    id: env
+    attributes:
+      label: Windows and Python versions
+      placeholder: Windows 11 23H2, Python 3.12, Pillow 12.0
+    validations:
+      required: true
+  - type: textarea
+    id: extra
+    attributes:
+      label: Anything else
+      description: Byte breakdown of the source (`/Length` of each image / font object) helps a lot.

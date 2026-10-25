@@ -1,5 +1,11 @@
 # pdf-shrink
 
+[![ci](https://img.shields.io/badge/ci-GitHub%20Actions-blue?logo=github)](.github/workflows/ci.yml)
+[![license: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![platform](https://img.shields.io/badge/platform-Windows%2010%2F11-blue)](docs/algorithm.md)
+[![python](https://img.shields.io/badge/python-3.9%2B-blue)](requirements.txt)
+
+
 Shrink a PDF, or turn one into JPG/PNG, **without turning the text to mush**.
 
 Most "compress PDF" tools rasterize the page or re-subset the fonts badly. Chinese

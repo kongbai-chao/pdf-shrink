@@ -1,0 +1,16 @@
+name: Question
+description: Ask how to hit a specific size limit
+labels: [question]
+body:
+  - type: textarea
+    id: goal
+    attributes:
+      label: What limit are you targeting?
+      placeholder: 200 KB per attachment, JPG only, must keep a red seal in colour.
+    validations:
+      required: true
+  - type: textarea
+    id: tried
+    attributes:
+      label: What have you tried?
+      description: Commands and their output. Remember to strip personal data.

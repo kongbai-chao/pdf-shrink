@@ -1,5 +1,11 @@
 # pdf-shrink
 
+[![ci](https://img.shields.io/badge/ci-GitHub%20Actions-blue?logo=github)](.github/workflows/ci.yml)
+[![license: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![platform](https://img.shields.io/badge/platform-Windows%2010%2F11-blue)](docs/algorithm.md)
+[![python](https://img.shields.io/badge/python-3.9%2B-blue)](requirements.txt)
+
+
 把一个 PDF 压到指定体积，或者转成 JPG / PNG，**而且不让文字糊掉**。
 
 常见的「压缩 PDF」要么把整页栅格化成一张 JPEG，要么粗暴地重子集化字体。中文文档更麻烦：

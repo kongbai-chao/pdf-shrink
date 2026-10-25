@@ -1,0 +1,34 @@
+name: Feature request
+description: Suggest a format, a platform, or a new heuristic
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What are you trying to do that the tool cannot do today?
+      placeholder: My portal caps images at 100 KB and requires PNG.
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: How would you like it to behave?
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Portability (Linux / macOS)
+        - Encoding (new codec, better sizes)
+        - Layer classification (scans, forms, multi-column)
+        - CLI / automation
+        - Documentation
+    validations:
+      required: true
+  - type: checkboxes
+    id: contribute
+    attributes:
+      label: Would you be able to help?
+      options:
+        - label: I can test on my documents and report numbers
+        - label: I can open a PR
