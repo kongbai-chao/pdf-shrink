@@ -34,7 +34,7 @@ jobs:
         run: python pdf_shrink.py tests/out/sample.pdf tests/out/shrunk.pdf --target-kb 200
 
       - name: PDF -> JPEG under a byte budget
-        run: python pdf_to_image.py tests/out/sample.pdf tests/out/page --target-kb 200
+        run: python pdf_to_image.py tests/out/sample.pdf tests/out/page --target-kb 195
 
       - name: Check the outputs are inside the budget
         shell: pwsh
@@ -43,5 +43,6 @@ jobs:
           $img = Get-Item tests/out/page.jpg
           "shrunk.pdf = $($pdf.Length) bytes"
           "page.jpg   = $($img.Length) bytes"
+          # 200 KB means either 204 800 or 200 000 bytes; hold the stricter line
           if ($pdf.Length -gt 204800) { throw "PDF output over budget" }
           if ($img.Length -gt 200000) { throw "image output over budget" }
